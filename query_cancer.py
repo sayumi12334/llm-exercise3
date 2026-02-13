@@ -15,7 +15,7 @@ vectordb = Chroma(
 )
 
 
-
+# %% 3) Questions
 
 questions = [
     "What are the main screening methods for lung cancer?",
@@ -34,5 +34,3 @@ for q in questions:
     for i, doc in enumerate(results, 1):
         print(doc.page_content[:500])
 
-# %%
-"""
