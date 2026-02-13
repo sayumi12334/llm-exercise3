@@ -20,7 +20,7 @@ EMBED_MODEL = "nomic-embed-text"
 CHAT_MODEL = "llama3.2:3b"
 
 
-# %% 2) Load ALL PDFs in the folder
+# %%  Load ALL PDFs in the folder
 
 loader = DirectoryLoader(DOCS_DIR, glob="**/*.pdf", loader_cls=PyPDFLoader)
 documents = loader.load()
