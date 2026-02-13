@@ -1,16 +1,5 @@
-# %%
-import os
-from langchain_community.vectorstores import Chroma
-from langchain_ollama import OllamaEmbeddings
+# %% Load presisted chromaDB
 
-DOCS_DIR = "cancer_docs"
-PERSIST_DIR = "chroma_store"
-COLLECTION_NAME = "Cancer"
-emb = OllamaEmbeddings(model="nomic-embed-text")
-
-# %%
-"""
-import os
 from langchain_community.vectorstores import Chroma
 from langchain_ollama import OllamaEmbeddings
 
@@ -24,6 +13,9 @@ vectordb = Chroma(
     persist_directory=PERSIST_DIR,
     collection_name=COLLECTION_NAME,
 )
+
+
+
 
 questions = [
     "What are the main screening methods for lung cancer?",
