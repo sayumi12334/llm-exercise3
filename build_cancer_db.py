@@ -33,6 +33,7 @@ chunks = splitter.split_documents(documents)
 
 emb = OllamaEmbeddings(model="nomic-embed-text")
 
+# %% build chroma and presist to disk
 vectordb = Chroma.from_documents(
     documents=chunks,
     embedding=emb,
@@ -40,10 +41,3 @@ vectordb = Chroma.from_documents(
     collection_name=COLLECTION_NAME,
 )
 vectordb.persist()
-print("✅ Saved to Chroma collection:", COLLECTION_NAME)
-
-
-        
-
-
-
