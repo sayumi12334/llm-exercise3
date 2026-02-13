@@ -26,7 +26,7 @@ loader = DirectoryLoader(DOCS_DIR, glob="**/*.pdf", loader_cls=PyPDFLoader)
 documents = loader.load()
 
 
-# 2) Split into chunks
+# %%  Split into chunks and embed
 splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=200)
 chunks = splitter.split_documents(documents)
 
