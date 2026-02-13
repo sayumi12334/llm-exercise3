@@ -10,8 +10,6 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain_ollama import OllamaEmbeddings
 
-
-
 DOCS_DIR = "cancer_docs"
 PERSIST_DIR = "chroma_store"
 COLLECTION_NAME = "Cancer"
@@ -40,4 +38,5 @@ vectordb = Chroma.from_documents(
     persist_directory=PERSIST_DIR,
     collection_name=COLLECTION_NAME,
 )
+
 vectordb.persist()
