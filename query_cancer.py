@@ -5,7 +5,7 @@ Docstring for llm-exercise3-dev.llm-exercise3.query_cancer
 """
 from sentence_transformers import CrossEncoder
 from langchain_community.vectorstores import Chroma
-from langchain_ollama import OllamaEmbeddings
+from langchain_ollama import ChatOllama, OllamaEmbeddings
 
 EMB_MODEL = "nomic-embed-text"
 PERSIST_DIR = "chroma_store"
@@ -24,7 +24,22 @@ vectordb = Chroma(
     collection_name=COLLECTION_NAME,
 )
 
+# %%
+reranker = CrossEncoder(RERANKER)
 
+llm = ChatOllama(model=LLM_MODEL)
+
+# %% best document using reranking
+
+def rerank_top1(query: str, docs):
+ 
+    pairs = [(query, d.page_content) for d in docs]
+
+    scores = reranker.predict(pairs)
+
+    best_idx = max(range(len(scores)), key=lambda i: scores[i])
+    
+    return docs[best_idx], float(scores[best_idx])
 # %% 3) Questions
 
 questions = [
