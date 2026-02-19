@@ -7,9 +7,15 @@ from sentence_transformers import CrossEncoder
 from langchain_community.vectorstores import Chroma
 from langchain_ollama import OllamaEmbeddings
 
-DOCS_DIR = "cancer_docs"
+EMB_MODEL = "nomic-embed-text"
 PERSIST_DIR = "chroma_store"
 COLLECTION_NAME = "Cancer"
+
+# %% retireve the first 20 chunks
+BEST_K = 20
+RERANKER = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+LLM_MODEL = "llama3.2:3b"
+
 emb = OllamaEmbeddings(model="nomic-embed-text")
 
 vectordb = Chroma(
