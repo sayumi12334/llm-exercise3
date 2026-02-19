@@ -38,7 +38,7 @@ def rerank_top1(query: str, docs):
     scores = reranker.predict(pairs)
 
     best_idx = max(range(len(scores)), key=lambda i: scores[i])
-    
+
     return docs[best_idx], float(scores[best_idx])
 # %% 3) Questions
 
@@ -52,10 +52,29 @@ questions = [
     "Explain liquid biopsy in cancer diagnosis",
 ]
 
+# %% feed best doc to LLM to generate final answer
 for q in questions:
-    print("\n")
+    print("\n" + "=" * 90)
     print("Q:", q)
-    results = vectordb.similarity_search(q, k=2)
-    for i, doc in enumerate(results, 1):
-        print(doc.page_content[:500])
-# %%
+  
+    candidates = vectordb.similarity_search(q, k=BEST_K)
+
+    best_doc, best_score = rerank_top1(q, candidates)
+
+    prompt = f"""
+ Answer question using only the context below.
+    If the context does not contain the answer, say "I don't know based on the provided documents."
+
+Question:
+{q}
+
+Context:
+{best_doc.page_content}
+""".strip()
+
+    # (D) Ask the LLM to generate the final answer based on that context
+    answer = llm.invoke(prompt).content
+
+    # (E) Print result
+    print(f"\nBest reranker score: {best_score:.4f}")
+    print("\nAnswer:\n", answer)
