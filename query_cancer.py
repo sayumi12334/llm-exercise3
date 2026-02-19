@@ -1,7 +1,9 @@
 # %% Load presisted chromaDB
 
 """
-Docstring for llm-exercise3-dev.llm-exercise3.query_cancer"""
+Docstring for llm-exercise3-dev.llm-exercise3.query_cancer
+"""
+from sentence_transformers import CrossEncoder
 from langchain_community.vectorstores import Chroma
 from langchain_ollama import OllamaEmbeddings
 
@@ -35,3 +37,4 @@ for q in questions:
     results = vectordb.similarity_search(q, k=2)
     for i, doc in enumerate(results, 1):
         print(doc.page_content[:500])
+# %%

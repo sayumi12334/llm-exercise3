@@ -15,8 +15,6 @@ PERSIST_DIR = "chroma_store"
 COLLECTION_NAME = "Cancer"
 
 EMBED_MODEL = "nomic-embed-text"
-CHAT_MODEL = "llama3.2:3b"
-
 
 # %%  Load ALL PDFs in the folder
 
